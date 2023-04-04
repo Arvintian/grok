@@ -4,3 +4,4 @@ github.com/tetratelabs/wazero v1.0.1 h1:xyWBoGyMjYekG3mEQ/W7xm9E05S89kJ/at696d/9
 github.com/tetratelabs/wazero v1.0.1/go.mod h1:wYx2gNRg8/WihJfSDxA1TIL8H+GkfLYm+bIfbblu9VQ=
 github.com/wasilibs/go-re2 v1.0.0 h1:pvrqtMzZgTMHVPfXJrk4YZwiqIXOKdfo5aed6CzUAW4=
 github.com/wasilibs/go-re2 v1.0.0/go.mod h1:8g69JapfgjSCx49dKOQij1dqA3sOvoH5NteaUy1X0SA=
+github.com/wasilibs/nottinygc v0.2.0 h1:cXz2Ac9bVMLkpuOlUlPQMWowjw0K2cOErXZOFdAj7yE=

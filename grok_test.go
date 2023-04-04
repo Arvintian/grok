@@ -27,7 +27,7 @@ func TestParseWithDefaultCaptureMode(t *testing.T) {
 		if captures["timestamp"] != "23/Apr/2014:22:58:32 +0200" {
 			t.Fatalf("%s should be '%s' have '%s'", "timestamp", "23/Apr/2014:22:58:32 +0200", captures["timestamp"])
 		}
-		if captures["TIME"] != "" {
+		if captures["TIME"] != nil {
 			t.Fatalf("%s should be '%s' have '%s'", "TIME", "", captures["TIME"])
 		}
 	}
@@ -180,7 +180,7 @@ func TestDayCompile(t *testing.T) {
 	g, _ := New()
 	g.AddPattern("DAY", "(?:Mon(?:day)?|Tue(?:sday)?|Wed(?:nesday)?|Thu(?:rsday)?|Fri(?:day)?|Sat(?:urday)?|Sun(?:day)?)")
 	pattern := "%{DAY}"
-	_, err := g.compile(pattern)
+	_, err := g.Compile(pattern)
 	if err != nil {
 		t.Fatal("Error:", err)
 	}
@@ -188,7 +188,7 @@ func TestDayCompile(t *testing.T) {
 
 func TestErrorCompile(t *testing.T) {
 	g, _ := New()
-	_, err := g.compile("(")
+	_, err := g.Compile("(")
 	if err == nil {
 		t.Fatal("Error:", err)
 	}
@@ -323,7 +323,7 @@ func TestNamedCapture(t *testing.T) {
 		if captures, err := g.Parse(pattern, text); err != nil {
 			t.Fatalf("error can not capture : %s", err.Error())
 		} else {
-			if captures[key] != value {
+			if captures[key] != nil && captures[key] != value {
 				t.Fatalf("%s should be '%s' have '%s'", key, value, captures[key])
 			}
 		}
@@ -721,8 +721,8 @@ func TestGrok_AddPatternsFromMap_complex(t *testing.T) {
 
 func TestParseStream(t *testing.T) {
 	g, _ := New()
-	pTest := func(m map[string]string) error {
-		ts, ok := m["timestamp"]
+	pTest := func(m map[string]interface{}) error {
+		ts, ok := m["timestamp"].(string)
 		if !ok {
 			t.Error("timestamp not found")
 		}
@@ -744,7 +744,7 @@ func TestParseStream(t *testing.T) {
 
 func TestParseStreamError(t *testing.T) {
 	g, _ := New()
-	pTest := func(m map[string]string) error {
+	pTest := func(m map[string]interface{}) error {
 		if _, ok := m["timestamp"]; !ok {
 			return fmt.Errorf("timestamp not found")
 		}
