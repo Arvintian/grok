@@ -11,7 +11,7 @@ import (
 	"strings"
 	"sync"
 
-	regexp "github.com/wasilibs/go-re2"
+	"github.com/grafana/regexp"
 )
 
 var (
